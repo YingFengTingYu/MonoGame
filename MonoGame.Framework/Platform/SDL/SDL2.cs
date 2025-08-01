@@ -15,14 +15,7 @@ internal static class Sdl
 
     private static IntPtr GetNativeLibrary()
     {
-        if (CurrentPlatform.OS == OS.Windows)
-            return FuncLoader.LoadLibraryExt("SDL2.dll");
-        else if (CurrentPlatform.OS == OS.Linux)
-            return FuncLoader.LoadLibraryExt("libSDL2-2.0.so.0");
-        else if (CurrentPlatform.OS == OS.MacOSX)
-            return FuncLoader.LoadLibraryExt("libSDL2-2.0.0.dylib");
-        else
-            return FuncLoader.LoadLibraryExt("sdl2");
+        return FuncLoader.LoadLibraryExt("libSDL2.so");
     }
 
     public static Version version;

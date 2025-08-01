@@ -1530,7 +1530,7 @@ namespace MonoGame.OpenGL
             if (BoundApi == RenderApi.ES)
                 DepthRangef(min, max);
             else
-                DepthRanged(min, max);
+                DepthRangef(min, max);
         }
 
         internal static void Uniform1 (int location, int value) {

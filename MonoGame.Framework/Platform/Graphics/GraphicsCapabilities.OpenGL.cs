@@ -74,8 +74,8 @@ namespace Microsoft.Xna.Framework.Graphics
 
             // Framebuffer objects
 #if GLES
-            SupportsFramebufferObjectARB = GL.BoundApi == GL.RenderApi.ES && (device.glMajorVersion >= 2 || GL.HasExtension("GL_ARB_framebuffer_object")); // always supported on GLES 2.0+
-            SupportsFramebufferObjectEXT = GL.HasExtension("GL_EXT_framebuffer_object");;
+            SupportsFramebufferObjectARB = true; // always supported on GLES 2.0+
+            SupportsFramebufferObjectEXT = true;
             SupportsFramebufferObjectIMG = GL.HasExtension("GL_IMG_multisampled_render_to_texture") |
                                                  GL.HasExtension("GL_APPLE_framebuffer_multisample") |
                                                  GL.HasExtension("GL_EXT_multisampled_render_to_texture") |
@@ -83,8 +83,8 @@ namespace Microsoft.Xna.Framework.Graphics
 #else
             // if we're on GL 3.0+, frame buffer extensions are guaranteed to be present, but extensions may be missing
             // it is then safe to assume that GL_ARB_framebuffer_object is present so that the standard function are loaded
-            SupportsFramebufferObjectARB = device.glMajorVersion >= 3 || GL.HasExtension("GL_ARB_framebuffer_object");
-            SupportsFramebufferObjectEXT = GL.HasExtension("GL_EXT_framebuffer_object");
+            SupportsFramebufferObjectARB = true;
+            SupportsFramebufferObjectEXT = true;
 #endif
             // Anisotropic filtering
             int anisotropy = 0;
