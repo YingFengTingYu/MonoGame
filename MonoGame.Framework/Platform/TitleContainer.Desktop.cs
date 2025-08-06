@@ -4,10 +4,26 @@
 
 using System;
 using System.IO;
+using System.Reflection;
 using MonoGame.Framework.Utilities;
 
 namespace Microsoft.Xna.Framework
 {
+    public static class ResourceManagerReceiver
+    {
+        private static Assembly _assembly;
+
+        public static void Init(Assembly assembly)
+        {
+            _assembly = assembly;
+        }
+
+        public static Stream OpenFile(string path)
+        {
+            return _assembly.GetManifestResourceStream(path);
+        }
+    }
+
     partial class TitleContainer
     {
         static partial void PlatformInit()
@@ -27,11 +43,14 @@ namespace Microsoft.Xna.Framework
 
         private static Stream PlatformOpenStream(string safeName)
         {
-            var absolutePath = Path.Combine(Location, safeName);
-            if (File.Exists(absolutePath))
-            {
-                return File.OpenRead(absolutePath);
-            }
+            var absolutePath = "Entry." + safeName.Replace('/', '.').Replace('\\', '.');
+            return ResourceManagerReceiver.OpenFile(absolutePath);
+            //
+            // var absolutePath = Path.Combine(Location, safeName);
+            // if (File.Exists(absolutePath))
+            // {
+            //     return File.OpenRead(absolutePath);
+            // }
 
             return null;
         }
